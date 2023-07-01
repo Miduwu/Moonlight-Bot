@@ -22,6 +22,8 @@ export class data extends Maker {
         .addField("Prefix", ctx.get<string>("prefix")!, true)
         .setTimestamp(new Date().toString());
 
+        const r = new Builders.ComponentBuilder().addURLButton({ url: `https://discord.com/api/oauth2/authorize?client_id=${ctx.get("id")}&permissions=0&scope=bot`, label: "Invite" })
+
         let channel = await this.bot.core.getChannel("1111852742525321368", { guild: ctx.guild!, force: true }) as AnyTextableChannel
         await channel.createMessage({ embeds: [embed.toJSON()] })
         await ctx.send({ content: "Your bot was uploaded successfully!", flags: 64 })
