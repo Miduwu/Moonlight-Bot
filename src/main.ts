@@ -1,4 +1,4 @@
-import { Erine } from "erine";
+import { Erine, HelpCommand } from "erine";
 import { Database } from "midb";
 import { config } from "dotenv";
 
@@ -8,6 +8,7 @@ const bot = new Erine({
     auth: `Bot ${process.env.TOKEN}`,
     prefix: ["mun!", "m!"],
     autoSync: true,
+    helpCommand: HelpCommand,
     replyOnEdit: true,
     guildOnly: true,
     gateway: {

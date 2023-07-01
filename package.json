@@ -8,7 +8,7 @@
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "easy-api.ts": "^2.2.0",
-    "erine": "^1.2.1-adv",
+    "erine": "^1.2.2-adv",
     "midb": "^2.0.0",
     "midou.ts": "^1.0.2",
     "tslib": "^2.5.2"

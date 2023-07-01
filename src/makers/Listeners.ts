@@ -1,4 +1,4 @@
-import { Maker, Event, AnyError, Errors, Builders } from "erine";
+import { Maker, Event, AnyError, Errors, Builders, Command, Context } from "erine";
 import axios from "axios";
 import { db } from "../main";
 
@@ -8,6 +8,11 @@ async function loop(api_url: string) {
 
 export class data extends Maker {
     public cross: string = "<:Cross:829109836943720499>"
+
+    @Command({ description: "Responds with pong" })
+    async ping(ctx: Context) {
+        await ctx.send("Pong! " + ctx.guild?.shard.latency)
+    }
 
     @Event
     async ready() {
@@ -27,9 +32,7 @@ export class data extends Maker {
         // @ts-ignore
         if(Object.keys(Errors).some(e => error instanceof Errors[e])) {
             const embed = new Builders.EmbedBuilder()
-            .setAuthor(error.ctx.author.username, error.ctx.author.avatarURL())
             .setDescription(`${this.cross} ${error.message}`)
-            .setFooter(this.bot.user.username, this.bot.user.avatarURL())
             .setColor(0xe74c3c)
             await error.ctx.send({ embeds: [embed.toJSON()] })
         } else return

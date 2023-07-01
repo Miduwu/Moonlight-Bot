@@ -1,4 +1,4 @@
-import { Context, Command, Errors, Maker, Param, ParamType } from "erine";
+import { Context, Command, Errors, Maker, Param, ParamType, Dispatch, AutocompleteInteraction } from "erine";
 import { API, SourceFunction } from "easy-api.ts";
 import { cwd } from "process";
 import { join } from "path"
@@ -7,7 +7,7 @@ const api = new API({ port: 3000 });
 const dir = join(cwd(), "/node_modules/easy-api.ts/package.json");
 
 class EatsFns extends Maker {
-    @Command({ aliases: ["func", "fn"], name: "function", description: "Return a easy-api.ts function data." })
+    @Command({ aliases: ["func", "fn", "f"], name: "function", description: "Return a easy-api.ts function data." })
     @Param(ParamType.String, { autocomplete: true, name: "name", description: "Function name.", required: true })
     async eatsfunc(ctx: Context) {
         const name = ctx.get<string>("name")!;
@@ -32,6 +32,12 @@ class EatsFns extends Maker {
                 color: 0x3498DB
             }]
         })
+    }
+
+    @Dispatch
+    async name(interaction: AutocompleteInteraction) {
+        let filtered = api.interpreter.functions.filter(f => f.data.name.toLowerCase().startsWith(interaction.data.options.getFocused()))
+        interaction.result(filtered.map(f => { return { name: f.data.name, value: f.data.name } }).slice(0, 24))
     }
 }
 
