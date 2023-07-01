@@ -4,3 +4,6 @@ lib/
 .env
 run.sh
 db/
+tsconfig.tsbuildinfo
+.npm
+.git
