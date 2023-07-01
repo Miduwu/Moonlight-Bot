@@ -6,8 +6,9 @@ config()
 
 const bot = new Erine({
     auth: `Bot ${process.env.TOKEN}`,
-    prefix: "mun!",
+    prefix: ["mun!", "m!"],
     autoSync: true,
+    replyOnEdit: true,
     guildOnly: true,
     gateway: {
         intents: ["ALL"],
@@ -21,7 +22,7 @@ const bot = new Erine({
 const db = new Database({ path: "./db", tables: ["apis"] })
 db.start()
 
-bot.load(`./${__dirname}/makers`).then(() => console.log("Makers successfully loaded!"))
+bot.load("./lib/makers").then(() => console.log("Makers successfully loaded!"))
 
 bot.connect()
 
