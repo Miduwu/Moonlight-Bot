@@ -1,1 +1,0 @@
-# Epic erine@adv bot template
