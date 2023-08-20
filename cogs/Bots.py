@@ -42,7 +42,7 @@ class Bots(commands.Cog):
         emb.add_field(name="Bot", value=user.mention)
         emb.set_footer(text=user.name, icon_url=user.display_avatar)
         emb.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar)
-        await user.add_roles(848436249999048704)
+        await user.add_roles(discord.Object(848436249999048704))
         emb.set_thumbnail(url=ctx.author.display_avatar)
         channel = self.bot.get_channel(1111852742525321368)
 
